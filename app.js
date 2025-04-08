@@ -16,7 +16,7 @@ app.get('/trees', (req, res) => {
 app.get('/trees/:id', (req, res) => {
     const id = parseInt(req.params.id);
     if (id < 0 || id >= trees.length) {
-        res.status(404).json({ message: 'Tree not found' });
+        return res.status(404).json({ message: 'Tree not found' });
     };
     res.status(200).json(trees[id]);
 });
@@ -34,7 +34,7 @@ app.post('/trees', (req, res) => {
 app.put('/trees/:id', (req, res) => {
     const id = parseInt(req.params.id);
     if (id < 0 || id >= trees.length) {
-        res.status(404).json({ message: 'Tree not found!' });
+        return res.status(404).json({ message: 'Tree not found!' });
     };
     const { name, category, price, isEvergreen } = req.body;
     if (!name || !category || !price || isEvergreen === null) {
@@ -47,7 +47,7 @@ app.put('/trees/:id', (req, res) => {
 app.delete('/trees/:id', (req, res) => {
     const id = parseInt(req.params.id);
     if (id < 0 || id >= trees.length) {
-        res.status(404).json({ message: 'Tree not found!' });
+        return res.status(404).json({ message: 'Tree not found!' });
     };
     trees.splice(id, 1);
     res.status(200).json({ message: 'Delete successful!' });
